@@ -21,7 +21,6 @@ jobs:
       - name: Cleanup disk space before operation
         run: |
           echo "=== 清理前的磁盘空间 ==="
-          df -h /home/runner
           echo ""
           echo "=== 开始清理 ==="
           # 1. 清除APT缓存（如果使用了apt）
