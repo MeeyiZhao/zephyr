@@ -29,6 +29,11 @@ jobs:
             echo "EVENT_TRIGER_REF=${{ github.ref }}" >> $GITHUB_ENV
           fi
 
+      - name: Set environment variables
+        run: |
+          echo "ZSDK_VERSION=0.17.0" >> $GITHUB_ENV
+          echo "HOSTTYPE=x86_64" >> $GITHUB_ENV
+
       - name: setup sdk
         shell: bash
         run: |
@@ -36,6 +41,7 @@ jobs:
           cd /opt/toolchains
           echo "ZSDK_VERSION=0.17.0" >> $GITHUB_ENV
           echo "HOSTTYPE=x86_64" >> $GITHUB_ENV
+          ZSDK_VERSION=0.17.0
           wget -q --show-progress --progress=bar:force:noscroll https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.17.0/zephyr-sdk-0.17.0_linux-x86_64.tar.xz
           tar xf zephyr-sdk-${ZSDK_VERSION}_linux-x86_64.tar.xz
           zephyr-sdk-${ZSDK_VERSION}/setup.sh -t all -h -c
