@@ -34,8 +34,6 @@ jobs:
           sudo rm -rf /tmp/* 2>/dev/null || true
           sudo rm -rf /var/tmp/* 2>/dev/null || true
           echo ""
-          echo "=== 清理后的磁盘空间 ==="
-          df -h /home/runner
 
       - name: set_env
         run: |
