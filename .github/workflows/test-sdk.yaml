@@ -1,0 +1,47 @@
+name: Build peripheral
+run-name: Build peripheral
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "0 0 * * *"
+jobs:
+  Build-peripheral:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: check size
+        run: |
+          df -h
+
+      - name: set_env
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" -o "${{ github.event_name }}" = "pull_request_target" ];then
+            echo "This is pull request"
+            echo "EVENT_TRIGER_REF=${{ github.event.pull_request.head.sha }}" >> $GITHUB_ENV
+          fi
+          if [ "${{ github.event_name }}" = "push" ];then
+            echo "This is push"
+            echo "EVENT_TRIGER_REF=${{ github.ref }}" >> $GITHUB_ENV
+          fi
+
+      - name: setup sdk
+        shell: bash
+        run: |
+          mkdir -p /opt/toolchains
+          cd /opt/toolchains
+          echo "ZSDK_VERSION=0.17.0" >> $GITHUB_ENV
+          wget -q --show-progress --progress=bar:force:noscroll https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v${ZSDK_VERSION}/zephyr-sdk-${ZSDK_VERSION}_linux-${HOSTTYPE}.tar.xz
+          tar xf zephyr-sdk-${ZSDK_VERSION}_linux-${HOSTTYPE}.tar.xz
+          zephyr-sdk-${ZSDK_VERSION}/setup.sh -t all -h -c
+          rm zephyr-sdk-${ZSDK_VERSION}_linux-${HOSTTYPE}.tar.xz
+          echo "zephyr sdk -> zephyr-sdk-${ZSDK_VERSION}"
+          ls /opt/toolchains/zephyr-sdk-${ZSDK_VERSION}
+          du -sh /opt/toolchains/zephyr-sdk-${ZSDK_VERSION}
+          /opt/toolchains/zephyr-sdk-${ZSDK_VERSION}/setup.sh -c
+      
+      - name: print_env
+        run: |
+          echo "sdk-version -> ${ZSDK_VERSION}"
+          echo "event_triger_ref: ${EVENT_TRIGER_REF}"
+          echo "${{ github.event.pull_request.head.sha || github.ref }}"
