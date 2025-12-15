@@ -33,6 +33,9 @@ jobs:
           sudo rm -rf /tmp/* 2>/dev/null || true
           sudo rm -rf /var/tmp/* 2>/dev/null || true
           echo ""
+          sudo rm -rf /usr/local/share/boost
+          sudo rm -rf $AGENT_TOOLSDIRECTORY
+          sudo rm -rf /opt/hostedtoolcache
 
       - name: set_env
         run: |
