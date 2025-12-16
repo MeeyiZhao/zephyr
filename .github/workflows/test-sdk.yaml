@@ -28,7 +28,7 @@ jobs:
           echo "-----------------------"
           du -h --max-depth=1 /opt
           echo "-----------------------"
-          cd /var/lib/docker/overlay2
+          cd /var/lib/docker
           du -h --max-depth=1 /var/lib/docker
           du -h --max-depth=1 /var/lib/docker/overlay2
 
