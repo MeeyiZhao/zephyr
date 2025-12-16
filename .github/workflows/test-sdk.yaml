@@ -12,10 +12,17 @@ jobs:
       ZSDK_VERSION: "0.17.0"
       HOSTTYPE: "x86_64"
 
+    container:
+      image: ghcr.io/zephyrproject-rtos/ci-base:latest
+      options: '--entrypoint /bin/bash'
+
     steps:
       - name: check size
         run: |
           df -h
+          ls -al /opt/
+          du -h --max-depth=1 /opt
+          sudo rm -rf /opt/fvps
 
       - name: set_env
         run: |
