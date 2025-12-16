@@ -23,9 +23,14 @@ jobs:
           ls -al /opt/
           du -h --max-depth=1 /opt
           sudo rm -rf /opt/fvps
-          echo ""
+          echo "-----------------------"
           df -h
+          echo "-----------------------"
           du -h --max-depth=1 /opt
+          echo "-----------------------"
+          cd /var/lib/docker/overlay2
+          du -h --max-depth=1 /var/lib/docker
+          du -h --max-depth=1 /var/lib/docker/overlay2
 
       - name: set_env
         run: |
