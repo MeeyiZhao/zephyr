@@ -27,11 +27,6 @@ jobs:
           df -h
           echo "-----------------------"
           du -h --max-depth=1 /opt
-          echo "-----------------------"
-          ls -ld /var/lib/docker
-          sudo cd /var/lib/docker
-          sudo du -h --max-depth=1 /var/lib/docker
-          sudo du -h --max-depth=1 /var/lib/docker/overlay2
 
       - name: set_env
         run: |
