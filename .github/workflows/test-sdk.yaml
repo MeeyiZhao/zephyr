@@ -6,7 +6,7 @@ on:
   schedule:
     - cron: "0 0 * * *"
 jobs:
-  Build-peripheral:
+  test:
     runs-on: ubuntu-latest
     env:
       ZSDK_VERSION: "0.17.0"
@@ -42,6 +42,8 @@ jobs:
           ls /opt/toolchains/zephyr-sdk-${ZSDK_VERSION}
           du -sh /opt/toolchains/zephyr-sdk-${ZSDK_VERSION}
           /opt/toolchains/zephyr-sdk-${ZSDK_VERSION}/setup.sh -c
+          echo " "
+          df -h
       
       - name: print_env
         run: |
