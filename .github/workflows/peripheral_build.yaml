@@ -18,6 +18,25 @@ jobs:
         run: |
           df -h
 
+      - name: Cleanup disk space before operation
+        run: |
+          echo "=== 清理前的磁盘空间 ==="
+          echo ""
+          echo "=== 开始清理 ==="
+          # 1. 清除APT缓存（如果使用了apt）
+          sudo apt-get clean 2>/dev/null || true
+          # 2. 删除临时的构建文件（根据你的项目调整路径）
+          sudo rm -rf /home/runner/_work/_temp/* 2>/dev/null || true
+          # 3. 可选：删除旧的诊断日志（小心操作）
+          # sudo find /home/runner/actions-runner/_diag -name "*.log" -mtime +0 -delete 2>/dev/null || true
+          # 4. 清理包管理器的缓存（通用方法）
+          sudo rm -rf /tmp/* 2>/dev/null || true
+          sudo rm -rf /var/tmp/* 2>/dev/null || true
+          echo ""
+          sudo rm -rf /usr/local/share/boost
+          sudo rm -rf $AGENT_TOOLSDIRECTORY
+          sudo rm -rf /opt/hostedtoolcache
+
       - name: set_env
         run: |
           if [ "${{ github.event_name }}" = "pull_request" -o "${{ github.event_name }}" = "pull_request_target" ];then

@@ -1,5 +1,5 @@
-name: Build peripheral
-run-name: Build peripheral
+name: test download sdk
+run-name: test
 on:
   push:
   pull_request:
@@ -8,6 +8,9 @@ on:
 jobs:
   Build-peripheral:
     runs-on: ubuntu-latest
+    env:
+      ZSDK_VERSION: "0.17.0"
+      HOSTTYPE: "x86_64"
 
     steps:
       - name: check size
