@@ -23,6 +23,7 @@ jobs:
           ls -al /opt/
           du -h --max-depth=1 /opt
           sudo rm -rf /opt/fvps
+          df -h
 
       - name: set_env
         run: |
