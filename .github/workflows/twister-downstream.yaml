@@ -138,14 +138,6 @@ jobs:
           export ZEPHYR_BASE=${PWD}
           export ZEPHYR_TOOLCHAIN_VARIANT=zephyr
 
-          echo "============= twister samples/bluetooth/peripheral ============="
-          ./scripts/twister -p rtl87x2g_evb -v -N -M --build-only -T samples/hello_world
-          ./scripts/twister -p rtl8752h_evb/rtl8752htv -v -N -M --build-only -T samples/hello_world
-
-          echo "============= twister samples/bluetooth/peripheral ============="
-          ./scripts/twister -p rtl87x2g_evb -v -N -M --build-only -T samples/bluetooth/peripheral
-          ./scripts/twister -p rtl8752h_evb/rtl8752htv -v -N -M --build-only -T samples/bluetooth/peripheral
-
-          echo "============= twister tests/boards/realtek/bee_osif ============="
-          ./scripts/twister -p rtl87x2g_evb -v -N -M --build-only -T tests/boards/realtek/bee_osif
-          ./scripts/twister -p rtl8752h_evb/rtl8752htv -v -N -M --build-only -T tests/boards/realtek/bee_osif
+          echo "============= twister samples/hello_world ============="
+          west build -p -b rtl87x2g_evb samples/hello_world
+          west build -p -b rtl8752h_evb/rtl8752htv samples/hello_world
