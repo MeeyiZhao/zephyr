@@ -6,7 +6,7 @@ on:
   schedule:
     - cron: "0 0 * * *"
 jobs:
-  Build-peripheral:
+  Build-Twister:
     runs-on: ubuntu-latest
 
     env:
@@ -141,3 +141,9 @@ jobs:
           echo "============= twister samples/hello_world ============="
           west build -p -b rtl87x2g_evb samples/hello_world
           west build -p -b rtl8752h_evb/rtl8752htv samples/hello_world
+
+          echo "============= twister tests\boards\rtl87x2g_evb ============="
+          west build -p -b rtl87x2g_evb tests/boards/rtl87x2g_evb/osif
+
+          echo "============= twister tests\boards\rtl8752h_evb ============="
+          west build -p -b rtl8752h_evb/rtl8752htv tests/boards/rtl8752h_evb/osif
